@@ -17,7 +17,7 @@ if errorlevel 1 (
   if errorlevel 1 goto :fail
 )
 
-echo [3/3] Starting Amou Music LAN remote...
+echo [3/3] Starting NetEase Cloud Music Remote Control...
 echo.
 "%PY%" server.py %*
 goto :eof

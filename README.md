@@ -1,6 +1,6 @@
-# Amou Music · 局域网播放遥控器
+# NetEase Cloud Music Remote Control · LAN Player Remote
 
-[![verify](https://github.com/Amoucocoa/Amou-music/actions/workflows/verify.yml/badge.svg)](https://github.com/Amoucocoa/Amou-music/actions/workflows/verify.yml)
+[![verify](https://github.com/Amoucocoa/netease-cloud-music-remote-control/actions/workflows/verify.yml/badge.svg)](https://github.com/Amoucocoa/netease-cloud-music-remote-control/actions/workflows/verify.yml)
 
 > **本项目的全部代码由 AI 编码代理生成，没有一行是人写的。** 设计决策由人做，实现由 AI 落地，验证脚本与文档同样是。欢迎带着怀疑来读。
 
@@ -31,7 +31,7 @@
 
 手机连不上的话，是因为 Windows 防火墙默认放行。以管理员身份运行 `start.bat`
 会自动加一条入站放行规则；普通权限运行则会在控制台打印一条可直接执行的命令。
-想撤销：`netsh advfirewall firewall delete rule name="Amou Music Remote"`。
+想撤销：`netsh advfirewall firewall delete rule name="NetEase Cloud Music Remote"`。
 
 ---
 

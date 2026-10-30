@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HTTP entry point for the Amou Music LAN remote.
+"""HTTP entry point for the NetEase Cloud Music Remote Control.
 
 Stdlib only -- no web framework. The whole surface is a handful of routes
 serving one page plus its vendored libraries, so a framework would add
@@ -31,13 +31,14 @@ STATIC_FILES = {
     "/gsap.min.js": "gsap.min.js",
 }
 
-FIREWALL_RULE_NAME = "Amou Music Remote"
+FIREWALL_RULE_NAME = "NetEase Cloud Music Remote"
+LEGACY_FIREWALL_RULE_NAMES = ("Amou Music Remote",)
 DEFAULT_PORT = 8765
 MAX_BODY_BYTES = 4096
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "AmouRemote/1.0"
+    server_version = "NetEaseRemote/1.0"
     protocol_version = "HTTP/1.1"
     # Keep-alive is required for the 2s poll to be cheap, but without an idle
     # bound every phone holds a thread (daemon_threads, so they die with the
@@ -333,6 +334,8 @@ def _netsh(*args: str) -> subprocess.CompletedProcess:
 
 def ensure_firewall_rule(port: int) -> bool:
     """Idempotent: drop any previous rule by name, then re-add for this port."""
+    for legacy_name in LEGACY_FIREWALL_RULE_NAMES:
+        _netsh("advfirewall", "firewall", "delete", "rule", f"name={legacy_name}")
     _netsh("advfirewall", "firewall", "delete", "rule", f"name={FIREWALL_RULE_NAME}")
     result = _netsh(
         "advfirewall", "firewall", "add", "rule",
@@ -364,7 +367,7 @@ def _configure_output() -> None:
 def print_banner(port: int) -> None:
     candidates = lan_ip_candidates() or ["127.0.0.1"]
     print("=" * 52)
-    print("  Amou Music - LAN Remote")
+    print("  NetEase Cloud Music Remote Control")
     print("=" * 52)
     print("  在手机浏览器打开：")
     for ip in candidates:
@@ -394,7 +397,7 @@ def print_banner(port: int) -> None:
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Amou Music LAN remote")
+    parser = argparse.ArgumentParser(description="NetEase Cloud Music Remote Control")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument("--host", default="0.0.0.0")
     args = parser.parse_args(argv)

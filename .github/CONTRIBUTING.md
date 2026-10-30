@@ -10,8 +10,8 @@ Windows only. The device layer talks to COM (`pycaw`, `comtypes`) and enumerates
 processes with `psutil`; there is no cross-platform path and adding one is a
 larger project than it looks.
 
-    git clone https://github.com/Amoucocoa/Amou-music.git
-    cd Amou-music
+    git clone https://github.com/Amoucocoa/netease-cloud-music-remote-control.git
+    cd netease-cloud-music-remote-control
     start.bat
 
 `start.bat` creates the venv, installs `requirements.txt`, and starts the server.
